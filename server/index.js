@@ -1,23 +1,23 @@
-import express from 'express'
-import dbConfig from './config/db'
-import middlewareConfig from './config/middleware'
-import { MeetupRoutes } from './modules'
+import express from 'express';
+import dbConfig from './config/db';
+import middlewareConfig from './config/middleware';
+import { MeetupRoutes, GroupRoutes } from './modules';
 
-const app = express()
+const app = express();
 
 /**
   DATABASE
 **/
-dbConfig()
+dbConfig();
 
 /**
   MIDDLEWARE
 **/
-middlewareConfig(app)
+middlewareConfig(app);
 
-app.use('/api', [MeetupRoutes])
+app.use('/api', [MeetupRoutes, GroupRoutes]);
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, err => {
   if (err) {
@@ -25,4 +25,4 @@ app.listen(PORT, err => {
   } else {
     console.log(`Listening on port ${PORT}!`);
   }
-})
+});
